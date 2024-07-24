@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.xenonial.waterqualitydetection"
     },
     "web": {
       "bundler": "metro",
@@ -27,10 +28,20 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "react-native-vision-camera"
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "0ae93968-d3f6-41ed-8d88-6a8978eb49a0"
+      }
+    },
+    "owner": "xenonial"
   }
 }
