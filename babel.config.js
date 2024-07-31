@@ -9,15 +9,15 @@ module.exports = function (api) {
           processNestedWorklets: true
         },
       ],
-      // ['react-native-worklets-core/plugin'],
-      [
-        'module-resolver',
-        {
-          alias: {
-            [pak.name]: path.join(__dirname, '..', pak.source),
-          },
-        },
-      ],
+      ['react-native-worklets-core/plugin'],
+      // [
+      //   'module-resolver',
+      //   {
+      //     alias: {
+      //       [pak.name]: path.join(__dirname, '..', pak.source),
+      //     },
+      //   },
+      // ],
     ],
   };
 };

@@ -16,12 +16,14 @@ const MODEL_ID = "water-quality-prediction";
 const MODEL_VERSION = "1";
 const API_URL = `https://detect.roboflow.com/${MODEL_ID}/${MODEL_VERSION}`;
 
-const roboflowDetect = async (frame: Frame): Promise<[Box[], number, number]> => {
+const roboflowDetect = async (base64image: string): Promise<Box[]> => {
   try {
     // Assuming frame.data is already in a format we can use (like base64)
     // const imageData = frame.data;
+    
+    // const base64Image = arrayBufferToBase64(frameBuffer)
 
-    const response = await axios.post(API_URL, frame, {
+    const response = await axios.post(API_URL, base64image, {
       params: { api_key: API_KEY },
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     });
@@ -40,10 +42,14 @@ const roboflowDetect = async (frame: Frame): Promise<[Box[], number, number]> =>
       ]
     }));
 
-    return [boxes, frame.width, frame.height];
+    return boxes;
   } catch (error) {
     console.error('Error in Roboflow detection:', error);
-    return [[], frame.width, frame.height];
+    if (axios.isAxiosError(error)) {
+      console.error('Response data:', error.response?.data);
+      console.error('Response status:', error.response?.status);
+    }
+    return [];
   }
 };
 
